@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "test": "NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
+    "test": "NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i -- --coverage",
     "prisma-test": "dotenv -e .env.test npx prisma studio"
   },
   "keywords": [],

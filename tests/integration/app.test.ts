@@ -2,10 +2,6 @@ import app from "../../src/app.js";
 import supertest from "supertest";
 import { prisma } from "../../src/database.js";
 import { faker } from "@faker-js/faker";
-import dotenv from "dotenv";
-dotenv.config();
-
-console.log("estou no banco ==", process.env.DATABASE_URL)
 
 import recommendationDataFactory from "../factories/recommendationDataFactory.js";
 import createRecommendationFactory from "../factories/createRecommendationFactory.js";
@@ -22,7 +18,6 @@ describe("POST /recommendations", () => {
 
 	it("should answer with status code 201, given a valid body", async () => {
 		const body = recommendationDataFactory();
-        console.log(body)
 
 		const res = await supertest(app).post("/recommendations").send(body);
 		const recommendations = await prisma.recommendation.findMany();
@@ -100,8 +95,6 @@ describe("GET /recommendations", () => {
 
       expect(result.status).toEqual(200);
       expect(result.body.length).toBeLessThanOrEqual(10);
-
-      console.log(result.body)
     });
 });
 
@@ -160,7 +153,6 @@ describe("GET /recommendations/top/:amount", () => {
 	    const recommendationData = await createRecommendationFactory();
 
         const amount = faker.datatype.number()
-        console.log(amount)
 
 		const result = await supertest(app).get(`/recommendations/top/${amount}`);
 
